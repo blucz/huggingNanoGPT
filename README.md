@@ -1,20 +1,20 @@
 # huggingNanoGPT
 
-🤗transformers style model that is compatible with [nanoGPT](https://github.com/karpathy/nanoGPT) checkpoints.
+🤗 Transformers style model that's compatible with [nanoGPT](https://github.com/karpathy/nanoGPT) checkpoints.
 
-The 🤗 ecosystem is expansive, but not particularly optimized for training. nanoGPT is great for low-overhead training but has a limited ecosystem and limited flexibility for inference. For example, there is no real alternative to the [trl](https://github.com/lvwerra/trl) library for nanoGPT, and the inference pipeline included with nanoGPT is missing creature comforts like beam search and repetition penalty.
+The 🤗 ecosystem is expansive, but not particularly optimized for pre-training. nanoGPT is a great low-overhead way to get into pre-training, but it has a limited ecosystem, and lacks some creature comforts.
 
-This 🤗transformers model attempts to blend the best of both worlds. Use nanoGPT for fast, manageable pretraining, then 🤗transformers for the nice ecosystem afterwards. 
+The `NanoGPTLMHeadModel` implementation in this repository is very similar to `GPT2LMHeadModel`, but it uses nanoGPT conventions for configuration, uses `nn.Linear` in place of `nn.Conv1D` in a few places, and adds the ability to enable/disable bias parameters. 
+
+Most likely, you would use this by pretraining or finetuning using nanoGPT first, and then using 🤗 Transformers for other kinds of training like RLHF or inference.
 
 ## Why not just use `GPT2LMHeadModel`?
 
 So, you can do this, and it's not that hard to jam the weights from `nanoGPT` into there.
 
-However, the models have some minor differences. In particular, nanoGPT defaults to `bias=False` for most of the layers, whereas 🤗transformers makes bias parameters mandatory. Also, there are a few places where `Conv1D` layers are used in 🤗transformers and `Linear` layers are used in nanoGPT. This model trues up those differences to get things as identical as possible. 
+However, the models have some minor differences. I suspect that these differences are not a big deal for inference-only use cases, but for training, I'd rather things be precise. This model gets things as identical as possible. 
 
-Finally, `GPT2Config` doesn't exactly match the nanoGPT config structure, and it's nice to have them match 1-1 to prevent mistakes. 
-
-According to [https://huggingface.co/blog/transformers-design-philosophy](The 🤗 people), the right thing to do in a situation like this is to fork the model, and that's what this repository is all about. 
+According to [https://huggingface.co/blog/transformers-design-philosophy](The 🤗 people), the right thing to do in a situation like this is to fork the model, and that's what this repository is all about. nanoGPT isn't quite GPT2, it's better than GPT2 in some minor ways, and it deserves to be its own thing. 
 
 ## TODO / Improvements
 
@@ -32,4 +32,4 @@ According to [https://huggingface.co/blog/transformers-design-philosophy](The �
 
 ## License
 
-This code incorporates portions of [🤗transformers](https://github.com/huggingface/transformers) and [nanoGPT](https://github.com/karpathy/nanoGPT) source code. It is released under the Apache 2.0 License
+This code incorporates portions of [🤗 Transformers](https://github.com/huggingface/transformers) and [nanoGPT](https://github.com/karpathy/nanoGPT). It is released under the Apache 2.0 License
