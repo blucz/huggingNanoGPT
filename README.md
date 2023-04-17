@@ -30,3 +30,6 @@ According to [https://huggingface.co/blog/transformers-design-philosophy](The ðŸ
     hf_model = NanoGPTLMHeadModel.from_nanogpt_ckpt('/path/to/ckpt.pt').cuda()
     hf_model.generate(...)
 
+## License
+
+This code incorporates portions of [ðŸ¤—transformers](https://github.com/huggingface/transformers) and [nanoGPT](https://github.com/karpathy/nanoGPT) source code. It is released under the Apache 2.0 License
