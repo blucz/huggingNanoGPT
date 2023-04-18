@@ -4,24 +4,23 @@
 
 The 🤗 ecosystem is expansive, but not particularly optimized for pre-training. nanoGPT is a great low-overhead way to get into pre-training, but it has a limited ecosystem, and lacks some creature comforts.
 
-The `NanoGPTLMHeadModel` implementation in this repository is very similar to `GPT2LMHeadModel`, but it uses nanoGPT conventions for configuration, uses `nn.Linear` in place of `nn.Conv1D` in a few places, and adds the ability to enable/disable bias parameters. 
+The `NanoGPTLMHeadModel` implementation in this repository is very similar to `GPT2LMHeadModel`, but it uses nanoGPT conventions for configuration, uses `nn.Linear` in place of `nn.Conv1D` in a few places, and adds the ability to enable/disable bias parameters like nanoGPT does.
 
-Most likely, you would use this by pretraining or finetuning using nanoGPT first, and then using 🤗 Transformers for other kinds of training like RLHF or inference.
+Most likely, you would use this by pretraining and/or finetuning using nanoGPT, and then using 🤗 Transformers for other kinds of training like RLHF or for its nicer inference pipeline. 
 
 ## Why not just use `GPT2LMHeadModel`?
 
-So, you can do this, and it's not that hard to jam the weights from `nanoGPT` into there.
+You're right, it's not that difficult to jam the weights from `nanoGPT` into `GPT2LMHeadModel`.
 
-However, the models have some minor differences. I suspect that these differences are not a big deal for inference-only use cases, but for training, I'd rather things be precise. This model gets things as identical as possible. 
+However, the models have some minor differences. I suspect that these differences are not a big deal for inference-only use cases, but for training, I'd rather have zero air-gaps. This model is as close as it gets and should behave like a totally native model in the 🤗 Transformers world. 
 
-According to [https://huggingface.co/blog/transformers-design-philosophy](The 🤗 people), the right thing to do in a situation like this is to fork the model, and that's what this repository is all about. nanoGPT isn't quite GPT2, it's better than GPT2 in some minor ways, and it deserves to be its own thing. 
 
 ## TODO / Improvements
 
 - Test to make sure that this works for more than just inference
 - Implement Flash Attention to improve performance
 - Clean up the code, remove some optional non-nanoGPT supported features, etc. 
-- Support converting back to a nanoGPT compatible checkpoint
+- Support saving nanoGPT compatible checkpoints
 
 ## Usage
 
