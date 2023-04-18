@@ -24,7 +24,7 @@ However, the models have some minor differences. I suspect that these difference
 
 ## Usage
 
-    from hugging_nano_gpt import NanoGPTLMHeadModel
+    from hugging_nanogpt import NanoGPTLMHeadModel
     
     hf_model = NanoGPTLMHeadModel.from_nanogpt_ckpt('/path/to/ckpt.pt').cuda()
     hf_model.generate(...)
