@@ -2,7 +2,7 @@
 
 🤗 Transformers style model that's compatible with [nanoGPT](https://github.com/karpathy/nanoGPT) checkpoints.
 
-The 🤗 ecosystem is expansive, but not particularly optimized for pre-training. nanoGPT is a great low-overhead way to get into pre-training, but it has a limited ecosystem, and lacks some creature comforts.
+The 🤗 ecosystem is expansive, but not particularly optimized for pre-training small GPT models. nanoGPT is a great low-overhead way to get into pre-training, but it has a limited ecosystem, and lacks some creature comforts.
 
 The `NanoGPTLMHeadModel` implementation in this repository is very similar to `GPT2LMHeadModel`, but it uses nanoGPT conventions for configuration, uses `nn.Linear` in place of `nn.Conv1D` in a few places, and adds the ability to enable/disable bias parameters like nanoGPT does.
 
